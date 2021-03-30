@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: analysis-service
+spec:
+    selector:
+        matchLabels:
+            app: analysis-service
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: analysis-service
+        spec:
+            containers:
+                - name: analysis-service
+                  image: ANLS_IMAGE_NAME
+                  imagePullPolicy: Always
+                  resources:
+                      limits:
+                          cpu:  650m
+                          memory: 650Mi
+                      requests:
+                          cpu: 500m
+                          memory: 500Mi
+                  ports:
+                      - containerPort: 80
+                  livenessProbe:
+                      httpGet:
+                          path: /analysis-service/actuator/health
+                          port: 80
+                      initialDelaySeconds: 200
+                      timeoutSeconds: 5
+                      periodSeconds: 20
+                  env:
+                      - name: SEGMENTME_DB_CONNECTOR_URI
+                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                      - name: REDIS_HOST
+                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                      - name: REDIS_PORT
+                        value: 6379
+                      - name: REDIS_CONNECTION_TIMEOUT
+                        value: 25
+                      - name: REDIS_READ_TIMEOUT
+                        value: 15
+                      - name: AUTH0_CLIENT_ID
+                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                      - name: AUTH0_CLIENT_SECRET
+                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                      - name: SPRING_PROFILES_ACTIVE
+                        value: "cloud"
+                      - name: ACCESS_SERVICE_HOST
+                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                      - name: ANALYSIS_CORE_POOL_SIZE
+                        value: 10
+                      - name: ANALYSIS_MAX_POOL_SIZE
+                        value: 10
+                      - name: ANALYSIS_QUEUE_POOL_SIZE
+                        value: 50
+                      - name: ANALYSIS_THREAD_NAME_PREFIX
+                        value: "analysis-executor-"
+                      - name: ASYNC_CORE_POOL_SIZE
+                        value: 10
+                      - name: ASYNC_MAX_POOL_SIZE
+                        value: 10
+                      - name: ASYNC_QUEUE_POOL_SIZE
+                        value: 50
+                      - name: ASYNC_THREAD_NAME_PREFIX
+                        value: "async-executor-"
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: analysis-service
+spec:
+    selector:
+        app: analysis-service
+    ports:
+        - name: http
+          protocol: TCP
+          port: 80
+          targetPort: 8080
+    type: ClusterIP
+
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+    name: analysis-service
+spec:
+    selector:
+        matchLabels:
+            app: analysis-service
+    maxUnavailable: 30%
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+    name: analysis-service
+spec:
+    scaleTargetRef:
+        apiVersion: extensions/v1beta1
+        kind: Deployment
+        name: analysis-service
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 80
+                        
+                        

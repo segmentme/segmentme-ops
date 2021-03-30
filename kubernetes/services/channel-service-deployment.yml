@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: channel-service
+spec:
+    selector:
+        matchLabels:
+            app: channel-service
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: channel-service
+        spec:
+            containers:
+                - name: channel-service
+                  image: ANLS_IMAGE_NAME
+                  imagePullPolicy: Always
+                  resources:
+                      limits:
+                          cpu:  650m
+                          memory: 650Mi
+                      requests:
+                          cpu: 500m
+                          memory: 500Mi
+                  ports:
+                      - containerPort: 80
+                  livenessProbe:
+                      httpGet:
+                          path: /channel-service/actuator/health
+                          port: 80
+                      initialDelaySeconds: 200
+                      timeoutSeconds: 5
+                      periodSeconds: 20
+                  env:
+                      - name: REDIS_HOST
+                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                      - name: REDIS_PORT
+                        value: 6379
+                      - name: REDIS_CONNECTION_TIMEOUT
+                        value: 25
+                      - name: REDIS_READ_TIMEOUT
+                        value: 15
+                      - name: AUTH0_CLIENT_ID
+                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                      - name: AUTH0_CLIENT_SECRET
+                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                      - name: SPRING_PROFILES_ACTIVE
+                        value: "cloud" 
+                      - name: ANALYSIS_SERVICE_URL
+                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                      - name: CHANNEL_SERVICE_PORT
+                        value: 7777
+                      - name: LOG_LEVEL
+                        value: ERROR
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: channel-service
+spec:
+    selector:
+        app: channel-service
+    ports:
+        - name: http
+          protocol: TCP
+          port: 80
+          targetPort: 8080
+    type: ClusterIP
+
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+    name: channel-service
+spec:
+    selector:
+        matchLabels:
+            app: channel-service
+    maxUnavailable: 30%
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+    name: channel-service
+spec:
+    scaleTargetRef:
+        apiVersion: extensions/v1beta1
+        kind: Deployment
+        name: channel-service
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 80
+                        
+                        
