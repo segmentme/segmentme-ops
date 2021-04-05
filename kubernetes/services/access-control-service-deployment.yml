@@ -12,9 +12,11 @@ spec:
             labels:
                 app: access-control-service
         spec:
+            imagePullSecrets:
+                -   name: aws-ecr
             containers:
                 - name: access-control-service
-                  image: ACS_IMAGE_NAME
+                  image: $REPLACE_WITH_DOCKER_REGISTRY/segmentme-access-control-service
                   imagePullPolicy: Always
                   resources:
                       limits:

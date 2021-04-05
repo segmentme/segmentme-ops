@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
                 - name: analysis-service
-                  image: ANLS_IMAGE_NAME
+                  image: $REPLACE_WITH_DOCKER_REGISTRY/segmentme-analysis-service
                   imagePullPolicy: Always
                   resources:
                       limits:

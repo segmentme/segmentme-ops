@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
                 - name: channel-service
-                  image: ANLS_IMAGE_NAME
+                  image: $REPLACE_WITH_DOCKER_REGISTRY/segmentme-channel-service
                   imagePullPolicy: Always
                   resources:
                       limits:
