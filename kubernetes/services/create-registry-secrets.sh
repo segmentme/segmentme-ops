@@ -1,5 +1,6 @@
+echo "Setup docker registry secrets"
 KUBERNETES_REGISTRY=aws-ecr
-DOCKER_ECR=$REPLACE_WITH_DOCKER_REGISTRY
+DOCKER_ECR=$DOCKER_REGISTRY
 DOCKER_USERNAME=AWS
 DOCKER_EMAIL=vak.kondratenko@gmail.com
 DOCKER_SECRET=$(aws ecr  --profile sme-vk get-login-password --region us-east-1 | sed -e 's/.*-p //' -e 's/ .*$//')
@@ -9,3 +10,4 @@ kubectl create secret docker-registry ${KUBERNETES_REGISTRY} \
 --docker-username=${DOCKER_USERNAME} \
 --docker-password=${DOCKER_SECRET} \
 --docker-email=${DOCKER_EMAIL}
+echo "Docker registry created"

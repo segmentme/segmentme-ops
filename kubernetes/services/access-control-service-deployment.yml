@@ -16,7 +16,7 @@ spec:
                 -   name: aws-ecr
             containers:
                 - name: access-control-service
-                  image: $REPLACE_WITH_DOCKER_REGISTRY/segmentme-access-control-service
+                  image: $DOCKER_REGISTRY/segmentme-access-control-service
                   imagePullPolicy: Always
                   resources:
                       limits:
@@ -29,18 +29,18 @@ spec:
                       - containerPort: 80
                   livenessProbe:
                       httpGet:
-                          path: /access-control-service/actuator/health
+                          path: /actuator/health
                           port: 80
                       initialDelaySeconds: 200
                       timeoutSeconds: 5
                       periodSeconds: 20
                   env:
                       - name: SEGMENTME_DB_CONNECTOR_URI
-                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                        value: $SEGMENTME_DB_CONNECTOR_URI
                       - name: AUTH0_CLIENT_ID
-                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                        value: $AUTH0_CLIENT_ID
                       - name: AUTH0_CLIENT_SECRET
-                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                        value: $AUTH0_CLIENT_SECRET
                       - name: SPRING_PROFILES_ACTIVE
                         value: "cloud"
 ---
@@ -55,7 +55,7 @@ spec:
         - name: http
           protocol: TCP
           port: 80
-          targetPort: 8080
+          targetPort: 80
     type: ClusterIP
 
 ---
