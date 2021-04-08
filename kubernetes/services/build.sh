@@ -1,4 +1,6 @@
-sh ./environment.sh
+#!/bin/sh
+
+$(cat ./environment.sh)
 echo "----"
 
 #./gradlew  -DSME_BE_HOST=$SME_BE_HOST -DDOCKER_REGISTRY=$DOCKER_REGISTRY  buildDocker -x test

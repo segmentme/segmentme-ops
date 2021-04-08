@@ -1,4 +1,5 @@
-sh ./build.sh
+#!/bin/sh
+$(cat ./build.sh)
 echo "----"
 
 aws ecr  --profile sme-vk get-login-password --region us-east-1 | docker login --username AWS --password-stdin 925575267836.dkr.ecr.us-east-1.amazonaws.com

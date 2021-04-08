@@ -12,19 +12,15 @@ spec:
             labels:
                 app: access-control-service
         spec:
-            imagePullSecrets:
-                -   name: aws-ecr
             containers:
                 - name: access-control-service
                   image: $DOCKER_REGISTRY/segmentme-access-control-service
                   imagePullPolicy: Always
                   resources:
                       limits:
-                          cpu:  650m
-                          memory: 650Mi
+                          memory: 200Mi
                       requests:
-                          cpu: 500m
-                          memory: 500Mi
+                          memory: 150Mi
                   ports:
                       - containerPort: 80
                   livenessProbe:

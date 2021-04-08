@@ -1,4 +1,6 @@
-echo "Setup docker registry secrets"
+#!/bin/sh
+#https://kubernetes.io/docs/concepts/containers/images/#configuring-nodes-to-authenticate-to-a-private-registry
+echo "Setup docker registry kube secrets"
 KUBERNETES_REGISTRY=aws-ecr
 DOCKER_ECR=$DOCKER_REGISTRY
 DOCKER_USERNAME=AWS
@@ -10,4 +12,12 @@ kubectl create secret docker-registry ${KUBERNETES_REGISTRY} \
 --docker-username=${DOCKER_USERNAME} \
 --docker-password=${DOCKER_SECRET} \
 --docker-email=${DOCKER_EMAIL}
-echo "Docker registry created"
+
+echo "Docker registry secret created"
+
+echo "Patch kube default serviceaccount "
+
+kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "aws-ecr"}]}'
+
+echo "Path complete"
+
