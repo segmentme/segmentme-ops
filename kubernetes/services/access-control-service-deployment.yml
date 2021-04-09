@@ -13,32 +13,32 @@ spec:
                 app: access-control-service
         spec:
             containers:
-                - name: access-control-service
-                  image: $DOCKER_REGISTRY/segmentme-access-control-service
-                  imagePullPolicy: Always
-                  resources:
-                      limits:
-                          memory: 200Mi
-                      requests:
-                          memory: 150Mi
-                  ports:
-                      - containerPort: 80
-                  livenessProbe:
-                      httpGet:
-                          path: /actuator/health
-                          port: 80
-                      initialDelaySeconds: 200
-                      timeoutSeconds: 5
-                      periodSeconds: 20
-                  env:
-                      - name: SEGMENTME_DB_CONNECTOR_URI
-                        value: $SEGMENTME_DB_CONNECTOR_URI
-                      - name: AUTH0_CLIENT_ID
-                        value: $AUTH0_CLIENT_ID
-                      - name: AUTH0_CLIENT_SECRET
-                        value: $AUTH0_CLIENT_SECRET
-                      - name: SPRING_PROFILES_ACTIVE
-                        value: "cloud"
+                -   name: access-control-service
+                    image: $DOCKER_REGISTRY/segmentme-access-control-service
+                    imagePullPolicy: Always
+                    resources:
+                        limits:
+                            memory: 200Mi
+                        requests:
+                            memory: 150Mi
+                    ports:
+                        -   containerPort: 80
+                    livenessProbe:
+                        httpGet:
+                            path: /actuator/health
+                            port: 80
+                        initialDelaySeconds: 200
+                        timeoutSeconds: 5
+                        periodSeconds: 20
+                    env:
+                        -   name: SEGMENTME_DB_CONNECTOR_URI
+                            value: $SEGMENTME_DB_CONNECTOR_URI
+                        -   name: AUTH0_CLIENT_ID
+                            value: $AUTH0_CLIENT_ID
+                        -   name: AUTH0_CLIENT_SECRET
+                            value: $AUTH0_CLIENT_SECRET
+                        -   name: SPRING_PROFILES_ACTIVE
+                            value: "cloud"
 ---
 apiVersion: v1
 kind: Service
@@ -48,10 +48,10 @@ spec:
     selector:
         app: access-control-service
     ports:
-        - name: http
-          protocol: TCP
-          port: 80
-          targetPort: 80
+        -   name: http
+            protocol: TCP
+            port: 80
+            targetPort: 80
     type: ClusterIP
 
 ---

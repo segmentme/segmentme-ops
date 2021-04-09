@@ -34,7 +34,7 @@ spec:
                       periodSeconds: 20
                   env:
                       - name: REDIS_HOST
-                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                        value: $REDIS_HOST
                       - name: REDIS_PORT
                         value: 6379
                       - name: REDIS_CONNECTION_TIMEOUT
@@ -42,13 +42,13 @@ spec:
                       - name: REDIS_READ_TIMEOUT
                         value: 15
                       - name: AUTH0_CLIENT_ID
-                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                        value: $AUTH0_CLIENT_ID
                       - name: AUTH0_CLIENT_SECRET
-                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                        value: $AUTH0_CLIENT_SECRET
                       - name: SPRING_PROFILES_ACTIVE
                         value: "cloud" 
                       - name: ANALYSIS_SERVICE_URL
-                        value: "FIND_A_SECURED_WAY_FOR_INJECT_THIS_PROBABLY_WITH_KUBERNETES_SECRETS"
+                        value: $ANALYSIS_SERVICE_URL
                       - name: CHANNEL_SERVICE_PORT
                         value: 7777
                       - name: LOG_LEVEL
