@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #find a way to set this up automatically
-#$(cat ./environment.sh)
+. ./environment.sh
 echo "----"
 ./kube-create-registry-secrets.sh
 echo "----"

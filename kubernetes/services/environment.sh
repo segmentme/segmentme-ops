@@ -6,4 +6,4 @@ export AUTH0_CLIENT_SECRET=Rsic0pW4Wr_q91Ppin-UNRuq5EdH5X7EmhA4ZUTcN-6MBu_Wy8Ce1
 export SME_BE_HOST=http://demo.segmentme.io:8756
 
 echo "Environment variable set"
-printenv
+
