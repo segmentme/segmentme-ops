@@ -3,7 +3,7 @@
 #find a way to set this up automatically
 . ./environment.sh
 echo "----"
-
+cd $1
 #./gradlew  -DSME_BE_HOST=$SME_BE_HOST -DDOCKER_REGISTRY=$DOCKER_REGISTRY  buildDocker -x test
 echo "Building segmentme-channel-service"
 ./gradlew  -DSME_BE_HOST=$SME_BE_HOST -DDOCKER_REGISTRY=$DOCKER_REGISTRY  :services:channel-service:buildDocker -x test -Dservice-name=segmentme-channel-service

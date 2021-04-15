@@ -18,16 +18,14 @@ spec:
                   imagePullPolicy: Always
                   resources:
                       limits:
-                          cpu:  650m
-                          memory: 650Mi
+                          memory: 200Mi
                       requests:
-                          cpu: 500m
-                          memory: 500Mi
+                          memory: 150Mi
                   ports:
                       - containerPort: 80
                   livenessProbe:
                       httpGet:
-                          path: /analysis-api-service/actuator/health
+                          path: /actuator/health
                           port: 80
                       initialDelaySeconds: 200
                       timeoutSeconds: 5
@@ -38,11 +36,11 @@ spec:
                       - name: REDIS_HOST
                         value: $REDIS_HOST
                       - name: REDIS_PORT
-                        value: 6379
+                        value: '6379'
                       - name: REDIS_CONNECTION_TIMEOUT
-                        value: 25
+                        value: '25'
                       - name: REDIS_READ_TIMEOUT
-                        value: 15
+                        value: '15'
                       - name: AUTH0_CLIENT_ID
                         value: $AUTH0_CLIENT_ID
                       - name: AUTH0_CLIENT_SECRET
@@ -67,7 +65,7 @@ spec:
         - name: http
           protocol: TCP
           port: 80
-          targetPort: 8080
+          targetPort: 80
     type: ClusterIP
 
 ---

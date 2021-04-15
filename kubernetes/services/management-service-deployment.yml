@@ -1,33 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: management-control-service
+    name: management-service
 spec:
     selector:
         matchLabels:
-            app: management-control-service
+            app: management-service
     replicas: 1
     template:
         metadata:
             labels:
-                app: management-control-service
+                app: management-service
         spec:
             containers:
-                - name: management-control-service
-                  image: $DOCKER_REGISTRY/segmentme-management-control-service
+                - name: management-service
+                  image: $DOCKER_REGISTRY/segmentme-management-service
                   imagePullPolicy: Always
                   resources:
                       limits:
-                          cpu:  650m
-                          memory: 650Mi
+                          memory: 256Mi
                       requests:
-                          cpu: 500m
-                          memory: 500Mi
+                          memory: 256Mi
                   ports:
                       - containerPort: 80
                   livenessProbe:
                       httpGet:
-                          path: /management-control-service/actuator/health
+                          path: /actuator/health
                           port: 80
                       initialDelaySeconds: 200
                       timeoutSeconds: 5
@@ -38,11 +36,11 @@ spec:
                       - name: REDIS_HOST
                         value: $REDIS_HOST
                       - name: REDIS_PORT
-                        value: 6379
+                        value: '6379'
                       - name: REDIS_CONNECTION_TIMEOUT
-                        value: 25
+                        value: '25'
                       - name: REDIS_READ_TIMEOUT
-                        value: 15
+                        value: '15'
                       - name: AUTH0_CLIENT_ID
                         value: $AUTH0_CLIENT_ID
                       - name: AUTH0_CLIENT_SECRET
@@ -55,38 +53,38 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-    name: management-control-service
+    name: management-service
 spec:
     selector:
-        app: management-control-service
+        app: management-service
     ports:
         - name: http
           protocol: TCP
           port: 80
-          targetPort: 8080
+          targetPort: 80
     type: ClusterIP
 
 ---
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
-    name: management-control-service
+    name: management-service
 spec:
     selector:
         matchLabels:
-            app: management-control-service
+            app: management-service
     maxUnavailable: 30%
 
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-    name: management-control-service
+    name: management-service
 spec:
     scaleTargetRef:
         apiVersion: extensions/v1beta1
         kind: Deployment
-        name: management-control-service
+        name: management-service
     minReplicas: 1
     maxReplicas: 3
     targetCPUUtilizationPercentage: 80
