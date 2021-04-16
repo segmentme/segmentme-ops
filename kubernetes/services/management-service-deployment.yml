@@ -18,9 +18,9 @@ spec:
                   imagePullPolicy: Always
                   resources:
                       limits:
-                          memory: 256Mi
+                          memory: 512Mi
                       requests:
-                          memory: 256Mi
+                          memory: 512Mi
                   ports:
                       - containerPort: 80
                   livenessProbe:
@@ -47,8 +47,8 @@ spec:
                         value: $AUTH0_CLIENT_SECRET
                       - name: SPRING_PROFILES_ACTIVE
                         value: "cloud"
-                      - name: ACCESS_SERVICE_HOST
-                        value: ACCESS_SERVICE_HOST
+                      - name:  ACCESS_SERVICE_HOST
+                        value: $ACCESS_SERVICE_HOST
 ---
 apiVersion: v1
 kind: Service

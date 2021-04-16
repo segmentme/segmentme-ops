@@ -18,7 +18,7 @@ spec:
                   imagePullPolicy: Always
                   resources:
                       limits:
-                          memory: 200Mi
+                          memory: 256Mi
                       requests:
                           memory: 150Mi
                   ports:
@@ -47,7 +47,7 @@ spec:
                         value: $AUTH0_CLIENT_SECRET
                       - name: SPRING_PROFILES_ACTIVE
                         value: "cloud"
-                      - name: ACCESS_SERVICE_HOST
+                      - name:  ACCESS_SERVICE_HOST
                         value: $ACCESS_SERVICE_HOST
                       - name: ANALYSIS_SERVICE_HOST
                         value: $ANALYSIS_SERVICE_HOST
@@ -92,5 +92,5 @@ spec:
     minReplicas: 1
     maxReplicas: 3
     targetCPUUtilizationPercentage: 80
-                        
+
                         

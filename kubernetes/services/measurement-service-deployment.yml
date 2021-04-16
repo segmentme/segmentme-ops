@@ -48,7 +48,7 @@ spec:
                       - name: SPRING_PROFILES_ACTIVE
                         value: "cloud"
                       - name: ACCESS_SERVICE_HOST
-                        value: ACCESS_SERVICE_HOST
+                        value: $ACCESS_SERVICE_HOST
 ---
 apiVersion: v1
 kind: Service
