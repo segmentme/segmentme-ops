@@ -18,16 +18,16 @@ spec:
                   imagePullPolicy: Always
                   resources:
                       limits:
-                          memory: 256Mi
+                          memory: 512Mi
                       requests:
-                          memory: 256Mi
+                          memory: 512Mi
                   ports:
                       - containerPort: 80
                   livenessProbe:
                       httpGet:
                           path: /actuator/health
                           port: 80
-                      initialDelaySeconds: 200
+                      initialDelaySeconds: 60
                       timeoutSeconds: 5
                       periodSeconds: 20
                   env:
@@ -44,7 +44,9 @@ spec:
                       - name: AUTH0_CLIENT_SECRET
                         value: $AUTH0_CLIENT_SECRET
                       - name: SPRING_PROFILES_ACTIVE
-                        value: "cloud" 
+                        value: "cloud"
+                      - name: JAVA_OPTS
+                        value: "-Xms512m -Xmx512m"
                       - name: ANALYSIS_SERVICE_URL
                         value: $ANALYSIS_SERVICE_URL
                       - name: CHANNEL_SERVICE_PORT

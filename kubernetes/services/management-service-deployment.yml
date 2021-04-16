@@ -27,7 +27,7 @@ spec:
                       httpGet:
                           path: /actuator/health
                           port: 80
-                      initialDelaySeconds: 200
+                      initialDelaySeconds: 60
                       timeoutSeconds: 5
                       periodSeconds: 20
                   env:
@@ -47,6 +47,8 @@ spec:
                         value: $AUTH0_CLIENT_SECRET
                       - name: SPRING_PROFILES_ACTIVE
                         value: "cloud"
+                      - name: JAVA_OPTS
+                        value: "-Xms512m -Xmx512m"
                       - name:  ACCESS_SERVICE_HOST
                         value: $ACCESS_SERVICE_HOST
 ---
