@@ -30,6 +30,9 @@ spec:
                       initialDelaySeconds: 60
                       timeoutSeconds: 5
                       periodSeconds: 20
+                  envFrom:
+                      -   secretRef:
+                              name: auth0-secret
                   env:
                       - name: SEGMENTME_DB_CONNECTOR_URI
                         value: $SEGMENTME_DB_CONNECTOR_URI

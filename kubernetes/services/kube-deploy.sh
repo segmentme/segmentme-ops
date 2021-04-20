@@ -12,21 +12,13 @@ waitForDeploymentStart(){
 . ./environment.sh
 echo "----"
 ./kube-create-registry-secrets.sh
+./kube-create-auth0-secrets.sh
 echo "----"
-echo "Delete access controll service"
-kubectl delete deployments access-control-service
+echo "Deleting All Deployments"
+kubectl delete --all deployments
 echo "----"
-echo "Delete analysis-service"
-kubectl delete analysis-service
-echo "----"
-echo "Delete analysis-api-service"
-kubectl delete analysis-api-service
-echo "----"
-echo "Delete management-service"
-kubectl delete management-service
-echo "----"
-echo "Delete measurement-service"
-kubectl delete measurement-service
+echo "Delete All Pods"
+kubectl delete --all pods
 echo "----"
 
 

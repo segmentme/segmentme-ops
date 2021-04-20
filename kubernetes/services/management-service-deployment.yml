@@ -30,6 +30,9 @@ spec:
                       initialDelaySeconds: 60
                       timeoutSeconds: 5
                       periodSeconds: 20
+                  envFrom:
+                      -   secretRef:
+                              name: auth0-secret
                   env:
                       - name: SEGMENTME_DB_CONNECTOR_URI
                         value: $SEGMENTME_DB_CONNECTOR_URI
@@ -41,10 +44,6 @@ spec:
                         value: '25'
                       - name: REDIS_READ_TIMEOUT
                         value: '15'
-                      - name: AUTH0_CLIENT_ID
-                        value: $AUTH0_CLIENT_ID
-                      - name: AUTH0_CLIENT_SECRET
-                        value: $AUTH0_CLIENT_SECRET
                       - name: SPRING_PROFILES_ACTIVE
                         value: "cloud"
                       - name: JAVA_OPTS

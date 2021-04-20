@@ -19,5 +19,5 @@ echo "Patch kube default serviceaccount "
 
 kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "aws-ecr"}]}'
 
-echo "Path complete"
+echo "Patch complete"
 
