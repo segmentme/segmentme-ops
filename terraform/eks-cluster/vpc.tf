@@ -4,9 +4,7 @@ provider "aws" {
 
 data "aws_availability_zones" "available" {}
 
-locals {
-    cluster_name = "${var.project_name}_${var.environment}_eks"
-}
+
 
 resource "random_string" "suffix" {
     length = 8
@@ -17,7 +15,7 @@ module "vpc" {
     source = "terraform-aws-modules/vpc/aws"
     version = "3.2.0"
 
-    name = "education-vpc"
+    name = "${local.global_prefix}-vpc"
     cidr = "10.0.0.0/16"
     azs = data.aws_availability_zones.available.names
     private_subnets = [

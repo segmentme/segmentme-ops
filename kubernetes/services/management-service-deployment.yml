@@ -40,16 +40,18 @@ spec:
                         value: $REDIS_HOST
                       - name: REDIS_PORT
                         value: '6379'
-                      - name: REDIS_CONNECTION_TIMEOUT
-                        value: '25'
-                      - name: REDIS_READ_TIMEOUT
-                        value: '15'
-                      - name: SPRING_PROFILES_ACTIVE
-                        value: "cloud"
-                      - name: JAVA_OPTS
-                        value: "-Xms512m -Xmx512m"
-                      - name:  ACCESS_SERVICE_HOST
-                        value: $ACCESS_SERVICE_HOST
+                      -   name: REDIS_CONNECTION_TIMEOUT
+                          value: '25'
+                      -   name: REDIS_READ_TIMEOUT
+                          value: '15'
+                      -   name: SPRING_PROFILES_ACTIVE
+                          value: "cloud"
+                      -   name: JAVA_OPTS
+                          value: "-Xms512m -Xmx512m"
+                      -   name: ACCESS_SERVICE_HOST
+                          value: $ACCESS_SERVICE_HOST
+                      -   name: MEASUREMENT_SERVICE_HOST
+                          value: $MEASUREMENT_SERVICE_HOST
 ---
 apiVersion: v1
 kind: Service

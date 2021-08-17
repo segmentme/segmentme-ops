@@ -44,26 +44,28 @@ spec:
                         value: '25'
                       - name: REDIS_READ_TIMEOUT
                         value: '15'
-                      - name: AUTH0_CLIENT_ID
-                        value: $AUTH0_CLIENT_ID
-                      - name: AUTH0_CLIENT_SECRET
-                        value: $AUTH0_CLIENT_SECRET
-                      - name: SPRING_PROFILES_ACTIVE
-                        value: "cloud"
-                      - name: JAVA_OPTS
-                        value: "-Xms512m -Xmx512m"
-                      - name: ACCESS_SERVICE_HOST
-                        value: $ACCESS_SERVICE_HOST
-                      - name: ANALYSIS_CORE_POOL_SIZE
-                        value: '10'
-                      - name: ANALYSIS_MAX_POOL_SIZE
-                        value: '10'
-                      - name: ANALYSIS_QUEUE_POOL_SIZE
-                        value: '50'
-                      - name: ANALYSIS_THREAD_NAME_PREFIX
-                        value: "analysis-executor-"
-                      - name: ASYNC_CORE_POOL_SIZE
-                        value: '10'
+                      -   name: AUTH0_CLIENT_ID
+                          value: $AUTH0_CLIENT_ID
+                      -   name: AUTH0_CLIENT_SECRET
+                          value: $AUTH0_CLIENT_SECRET
+                      -   name: SPRING_PROFILES_ACTIVE
+                          value: "cloud"
+                      -   name: JAVA_OPTS
+                          value: "-Xms512m -Xmx512m"
+                      -   name: ACCESS_SERVICE_HOST
+                          value: $ACCESS_SERVICE_HOST
+                      -   name: MEASUREMENT_SERVICE_HOST
+                          value: $MEASUREMENT_SERVICE_HOST
+                      -   name: ANALYSIS_CORE_POOL_SIZE
+                          value: '10'
+                      -   name: ANALYSIS_MAX_POOL_SIZE
+                          value: '10'
+                      -   name: ANALYSIS_QUEUE_POOL_SIZE
+                          value: '50'
+                      -   name: ANALYSIS_THREAD_NAME_PREFIX
+                          value: "analysis-executor-"
+                      -   name: ASYNC_CORE_POOL_SIZE
+                          value: '10'
                       - name: ASYNC_MAX_POOL_SIZE
                         value: '10'
                       - name: ASYNC_QUEUE_POOL_SIZE
