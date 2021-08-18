@@ -21,6 +21,7 @@ echo "Delete All Pods"
 kubectl delete --all pods
 echo "----"
 
+#kubectl rollout restart deployment  analysis-service
 
 echo "Deploy access control service"
 name="access-control-service"
