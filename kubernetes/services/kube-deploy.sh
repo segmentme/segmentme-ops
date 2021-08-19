@@ -55,4 +55,14 @@ envsubst < measurement-service-deployment.yml | kubectl apply -f -
 waitForDeploymentStart $name
 echo "----"
 
+
+
+echo "Deploy web app"
+name="web-app"
+envsubst < web-deployment.yml | kubectl apply -f -
+waitForDeploymentStart $name
+echo "----"
+
+
+
 kubectl get pods
