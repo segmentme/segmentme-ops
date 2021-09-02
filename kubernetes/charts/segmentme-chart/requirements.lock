@@ -1,0 +1,24 @@
+dependencies:
+- name: analysis-service
+  repository: file://../analysis-service
+  version: 0.1.0
+- name: analysis-service
+  repository: file://../analysis-api-service
+  version: 0.1.0
+- name: access-control-service
+  repository: file://../access-control-service
+  version: 0.1.0
+- name: channel-service
+  repository: file://../channel-service
+  version: 0.1.0
+- name: management-service
+  repository: file://../management-service
+  version: 0.1.0
+- name: measurement-service
+  repository: file://../measurement-service
+  version: 0.1.0
+- name: web
+  repository: file://../web
+  version: 0.1.0
+digest: sha256:3e78a532e08f030623c354369f7e1cb43376db65fca11e327cc22135f96be36f
+generated: "2021-09-02T17:17:18.5611097+03:00"

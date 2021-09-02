@@ -1,0 +1,28 @@
+dependencies:
+  - name: analysis-service
+    version: 0.1.0
+    repository: file://../analysis-service
+
+  - name: analysis-service
+    version: 0.1.0
+    repository: file://../analysis-api-service
+
+  - name: access-control-service
+    version: 0.1.0
+    repository: file://../access-control-service
+
+  - name: channel-service
+    version: 0.1.0
+    repository: file://../channel-service
+
+  - name: management-service
+    version: 0.1.0
+    repository: file://../management-service
+
+  - name: measurement-service
+    version: 0.1.0
+    repository: file://../measurement-service
+
+  - name: web
+    version: 0.1.0
+    repository: file://../web

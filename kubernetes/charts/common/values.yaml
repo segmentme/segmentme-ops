@@ -1,0 +1,24 @@
+replicaCount: 1
+limit:
+  memory: 512Mi
+  request: 512Mi
+maxUnavailable: 30%
+horizontalPodAutoScaler:
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+service:
+  type: ClusterIP
+env:
+  SEGMENTME_DB_CONNECTOR_URI: "mongodb+srv://segmentme-connector:segmentme-connector-password@cluster0.knky3.mongodb.net/segmentme?retryWrites=true&w=majority"
+  AUTH0_CLIENT_ID: FRFEhM5zwQCva2tSfBxDuM3og5TdjUpC
+  AUTH0_CLIENT_SECRET: Rsic0pW4Wr_q91Ppin-UNRuq5EdH5X7EmhA4ZUTcN-6MBu_Wy8Ce1J89WPCpkD_4
+  SME_BE_HOST: http://demo.segmentme.io:8756
+  ACCESS_SERVICE_HOST: "http://access-control-service"
+  ANALYSIS_SERVICE_HOST: "http://analysis-service"
+  MANAGEMENT_SERVICE_HOST: "http://management-service"
+  MEASUREMENT_SERVICE_HOST: "http://measurement-service"
+  CHANNEL_SERVICE_PORT: 7777
+  CHANNEL_SERVICE_HOST: channel-service
+  REDIS_HOST: "segmentme-demo-redis.favkow.0001.use1.cache.amazonaws.com"
+  REDIS_PORT: 6379
