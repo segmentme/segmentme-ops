@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
     name: web-app
+    labels:
+        app.kubernetes.io/name: web-app
 spec:
     selector:
         matchLabels:
@@ -65,7 +67,7 @@ spec:
             protocol: TCP
             port: 80
             targetPort: 80
-    type: LoadBalancer
+    type: NodePort
 
 ---
 apiVersion: policy/v1beta1
