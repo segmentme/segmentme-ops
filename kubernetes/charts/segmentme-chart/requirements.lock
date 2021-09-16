@@ -17,8 +17,11 @@ dependencies:
 - name: measurement-service
   repository: file://../measurement-service
   version: 0.1.0
+- name: local-ingress
+  repository: file://../local-ingress
+  version: 0.1.0
 - name: web
   repository: file://../web
   version: 0.1.0
-digest: sha256:3e78a532e08f030623c354369f7e1cb43376db65fca11e327cc22135f96be36f
-generated: "2021-09-02T17:17:18.5611097+03:00"
+digest: sha256:90bdf8b79629c53fc2d47bd32f2fec2fe0254d1b4462138a08d5dd04587c6aee
+generated: "2021-09-03T09:40:11.7400627+03:00"
