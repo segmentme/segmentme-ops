@@ -17,5 +17,5 @@ spec:
     serviceRef:
         name: analysis-api-service
         port: 80
-    targetGroupARN: arn:aws:elasticloadbalancing:us-east-1:925575267836:targetgroup/segmentme-demo-alb-api-tg/0d557f4d5f04924c
+    targetGroupARN: $API_LB_TG
     targetType: ip

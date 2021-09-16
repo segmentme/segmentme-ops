@@ -17,5 +17,5 @@ spec:
     serviceRef:
         name: web-app
         port: 80
-    targetGroupARN: arn:aws:elasticloadbalancing:us-east-1:925575267836:targetgroup/segmentme-demo-alb-web-tg/1fcd066e190eb22c
+    targetGroupARN: $WEB_LB_TG
     targetType: ip
