@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "cluster_secrets" {
-    name = "${local.global_prefix}_properties"
+    name = "${local.global_prefix}_secrets"
     recovery_window_in_days = 0
 }
 
