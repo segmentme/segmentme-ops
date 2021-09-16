@@ -18,7 +18,7 @@ resource "aws_elasticache_cluster" "segmentme-redis" {
     parameter_group_name = "default.redis6.x"
     engine_version = "6.x"
     security_group_ids = [
-        aws_security_group.all_worker_mgmt.id]
+        aws_security_group.redis-sg.id]
     subnet_group_name = aws_elasticache_subnet_group.segmentme-demo-redis-subnet.name
     port = 6379
 
