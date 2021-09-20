@@ -16,9 +16,6 @@ module "eks" {
 
     workers_group_defaults = {
         root_volume_type = "gp2"
-        //        target_group_arns = [
-        //            aws_lb_target_group.lb-api-tg.arn,
-        //            aws_lb_target_group.lb-web-tg.arn]
     }
     workers_additional_policies = [
         aws_iam_policy.load-balancer-policy.arn]

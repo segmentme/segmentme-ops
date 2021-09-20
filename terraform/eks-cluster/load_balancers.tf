@@ -6,14 +6,6 @@ resource "aws_lb" "alb" {
         aws_security_group.lb-sg.id]
     subnets = module.vpc.public_subnets
 
-    //    enable_deletion_protection = true
-
-    //    access_logs {
-    //        bucket  = aws_s3_bucket.lb_logs.bucket
-    //        prefix  = "test-lb"
-    //        enabled = true
-    //    }
-
     tags = merge(local.default_tags, {
         "ingress.k8s.aws/resource" = "LoadBalancer"
         "ingress.k8s.aws/stack" = "default/web-app-ingress"
