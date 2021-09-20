@@ -1,4 +1,4 @@
-SECRETS=$(aws secretsmanager get-secret-value --secret-id secret_store_test --query SecretString --output text)
+SECRETS=$(aws secretsmanager get-secret-value --secret-id segmentme-demo_secrets --query SecretString --output text)
 
  REDIS_HOST="$(jq -n "$SECRETS" | jq .REDIS_HOST)" \
   || error 'Unable to select REDIS_HOST from vault response'

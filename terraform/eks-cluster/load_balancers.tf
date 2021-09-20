@@ -95,7 +95,7 @@ resource "aws_lb_listener_rule" "lb_https_api_rule" {
     condition {
         host_header {
             values = [
-                "api."+var.route_53_hosted_zone]
+                "api.${var.route_53_hosted_zone}"]
         }
     }
 }
@@ -113,7 +113,7 @@ resource "aws_lb_listener_rule" "lb_http_api_rule" {
     condition {
         host_header {
             values = [
-                "api."+var.route_53_hosted_zone]
+                "api.${var.route_53_hosted_zone}"]
         }
     }
 }

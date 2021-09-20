@@ -14,12 +14,12 @@ echo "----"
 ./kube-create-registry-secrets.sh
 ./kube-create-auth0-secrets.sh
 echo "----"
-echo "Deleting All Deployments"
-kubectl delete --all deployments
-echo "----"
-echo "Delete All Pods"
-kubectl delete --all pods
-echo "----"
+#echo "Deleting All Deployments"
+#kubectl delete --all deployments
+#echo "----"
+#echo "Delete All Pods"
+#kubectl delete --all pods
+#echo "----"
 
 #kubectl rollout restart deployment  analysis-service
 
