@@ -1,10 +1,11 @@
 module "eks" {
+    source = "terraform-aws-modules/eks/aws"
+    cluster_version = "1.21"
+
     cluster_create_security_group = false
     worker_create_security_group = false
 
-    source = "terraform-aws-modules/eks/aws"
     cluster_name = local.cluster_name
-    cluster_version = "1.21"
     subnets = module.vpc.private_subnets
 
     cluster_security_group_id = aws_security_group.eks-cluster-sg.id
@@ -17,21 +18,24 @@ module "eks" {
     workers_group_defaults = {
         root_volume_type = "gp2"
     }
+
     workers_additional_policies = [
         aws_iam_policy.load-balancer-policy.arn]
 
-    worker_groups = [
-        {
-            name = "${local.global_prefix}-wg-1"
-            instance_type = "t3.small"
-            asg_desired_capacity = 2
-        },
-        {
-            name = "${local.global_prefix}-wg-2"
-            instance_type = "t3.small"
-            asg_desired_capacity = 1
-        },
-    ]
+    node_groups = {
+        group1 = {
+            desired_capacity = 2
+            max_capacity = 5
+            min_capacity = 1
+
+            launch_template_id = aws_launch_template.default.id
+            launch_template_version = aws_launch_template.default.default_version
+
+            additional_tags = {
+                CustomTag = "EKS node group"
+            }
+        }
+    }
 }
 
 
@@ -44,14 +48,6 @@ resource "aws_iam_policy" "load-balancer-policy" {
     tags = local.default_tags
 }
 
-
-provider "helm" {
-    kubernetes {
-        host = data.aws_eks_cluster.cluster.endpoint
-        token = data.aws_eks_cluster_auth.cluster.token
-        cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
-    }
-}
 
 
 resource "helm_release" "ingress" {

@@ -6,7 +6,7 @@ data "aws_route53_zone" "selected" {
 
 resource "aws_route53_record" "added-a-record" {
     zone_id = data.aws_route53_zone.selected.zone_id
-    name = "${data.aws_route53_zone.selected.name}"
+    name = data.aws_route53_zone.selected.name
     type = "A"
 
     alias {
