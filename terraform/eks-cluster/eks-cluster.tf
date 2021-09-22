@@ -2,6 +2,7 @@ module "eks" {
     source = "terraform-aws-modules/eks/aws"
     cluster_version = "1.21"
 
+    set_instance_types_on_lt = true
     cluster_create_security_group = false
     worker_create_security_group = false
 
@@ -22,13 +23,14 @@ module "eks" {
     workers_additional_policies = [
         aws_iam_policy.load-balancer-policy.arn]
 
+    node_groups_defaults = {
+        instance_types = []
+    }
     node_groups = {
         group1 = {
             desired_capacity = 2
             max_capacity = 5
             min_capacity = 1
-            instance_types = [
-                "t3.small"]
             launch_template_id = aws_launch_template.eks-node-template.id
             launch_template_version = aws_launch_template.eks-node-template.default_version
 
