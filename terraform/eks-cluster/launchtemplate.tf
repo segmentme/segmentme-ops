@@ -37,7 +37,6 @@ resource "aws_launch_template" "eks-node-template" {
     }
 
 
-    # Supplying custom tags to EKS instances is another use-case for LaunchTemplates
     tag_specifications {
         resource_type = "instance"
 
