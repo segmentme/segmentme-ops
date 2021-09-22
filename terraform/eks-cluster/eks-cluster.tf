@@ -27,9 +27,10 @@ module "eks" {
             desired_capacity = 2
             max_capacity = 5
             min_capacity = 1
-
-            launch_template_id = aws_launch_template.default.id
-            launch_template_version = aws_launch_template.default.default_version
+            instance_types = [
+                "t3.small"]
+            launch_template_id = aws_launch_template.eks-node-template.id
+            launch_template_version = aws_launch_template.eks-node-template.default_version
 
             additional_tags = {
                 CustomTag = "EKS node group"
@@ -47,7 +48,6 @@ resource "aws_iam_policy" "load-balancer-policy" {
     policy = file("iam-policy.json")
     tags = local.default_tags
 }
-
 
 
 resource "helm_release" "ingress" {

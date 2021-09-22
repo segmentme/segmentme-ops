@@ -4,7 +4,7 @@
 #
 # Trivia: AWS transparently creates a copy of your LaunchTemplate and actually uses that copy then for the node group. If you DONT use a custom AMI,
 # then the default user-data for bootstrapping a cluster is merged in the copy.
-resource "aws_launch_template" "default" {
+resource "aws_launch_template" "eks-node-template" {
     name_prefix = "${local.global_prefix}-lt"
     description = "Eks launch template"
     update_default_version = true
@@ -25,7 +25,6 @@ resource "aws_launch_template" "default" {
             # kms_key_id            = var.kms_key_arn
         }
     }
-
 
     monitoring {
         enabled = true
