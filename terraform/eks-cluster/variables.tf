@@ -6,7 +6,7 @@ variable "project_name" {
 
 variable "eks_instance_type" {
     description = "Type of instances which will be used for running eks node "
-    default = "t3.small"
+    default = "t3.medium"
     type = string
 }
 
