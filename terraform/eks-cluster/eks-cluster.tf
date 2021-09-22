@@ -27,7 +27,7 @@ module "eks" {
     }
     node_groups = {
         group1 = {
-            desired_capacity = 2
+            desired_capacity = 1
             max_capacity = 5
             min_capacity = 1
             launch_template_id = aws_launch_template.eks-node-template.id

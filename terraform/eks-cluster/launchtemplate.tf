@@ -8,7 +8,6 @@ resource "aws_launch_template" "eks-node-template" {
     name_prefix = "${local.global_prefix}-lt"
     description = "Eks launch template"
     update_default_version = true
-    image_id = "ami-087c17d1fe0178315"
     instance_type = var.eks_instance_type
 
     block_device_mappings {
