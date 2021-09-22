@@ -2,7 +2,6 @@ module "eks" {
     source = "terraform-aws-modules/eks/aws"
     cluster_version = "1.21"
 
-    set_instance_types_on_lt = true
     cluster_create_security_group = false
     worker_create_security_group = false
 
