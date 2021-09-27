@@ -4,6 +4,7 @@ module "eks" {
 
     cluster_create_security_group = false
     worker_create_security_group = false
+    wait_for_cluster_timeout = 600
 
     cluster_name = local.cluster_name
     subnets = module.vpc.private_subnets
