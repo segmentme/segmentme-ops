@@ -8,6 +8,7 @@ output "cluster_endpoint" {
   value       = module.eks.cluster_endpoint
 }
 
+
 output "lb-web-arn" {
   description = "ARN for WEB target group "
   value       = aws_lb_target_group.lb-web-tg.arn
