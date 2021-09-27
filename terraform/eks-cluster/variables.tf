@@ -25,7 +25,7 @@ variable "SEGMENTME_DB_CONNECTOR_URI" {
 variable "eks_instance_type" {
     description = "Type of instances which will be used for running eks node "
     default = "t3.small"
-    type = "string"
+    type = string
 }
 
 variable "tls_certificate_arn" {
