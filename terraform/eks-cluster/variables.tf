@@ -4,9 +4,28 @@ variable "project_name" {
     type = string
 }
 
+variable "AUTH0_CLIENT_ID" {
+    description = "Auth0 client id required to be set in secret manager. This value should be declared as secret environment in tf cloud"
+    default = "_"
+    type = string
+}
+
+variable "AUTH0_CLIENT_SECRET" {
+    description = "Auth0 client secret required to be set in secret manager. This value should be declared as secret environment in tf cloud"
+    default = "_"
+    type = string
+}
+
+variable "SEGMENTME_DB_CONNECTOR_URI" {
+    description = "MongoDB connection string required to be set in secret manager. This value should be declared as secret environment in tf cloud"
+    default = "_"
+    type = string
+}
+
 variable "eks_instance_type" {
     description = "Type of instances which will be used for running eks node "
     default = "t3.small"
+    type = "string"
 }
 
 variable "tls_certificate_arn" {

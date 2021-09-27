@@ -11,6 +11,9 @@ resource "aws_secretsmanager_secret_version" "environment_configuration" {
         REDIS_PORT = aws_elasticache_cluster.segmentme-redis.cache_nodes.0.port
         API_LB_TG = aws_lb_target_group.lb-api-tg.arn
         WEB_LB_TG = aws_lb_target_group.lb-web-tg.arn
+        AUTH0_CLIENT_ID = var.AUTH0_CLIENT_ID
+        AUTH0_CLIENT_SECRET = var.AUTH0_CLIENT_SECRET
+        SEGMENTME_DB_CONNECTOR_URI = var.SEGMENTME_DB_CONNECTOR_URI
     }
     )
 }
