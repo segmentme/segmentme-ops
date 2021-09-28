@@ -4,7 +4,6 @@ module "eks" {
 
   cluster_create_security_group = false
   worker_create_security_group  = false
-  wait_for_cluster_timeout      = 600
 
   cluster_name = local.cluster_name
   subnets      = module.vpc.private_subnets
@@ -15,10 +14,6 @@ module "eks" {
   tags = local.default_tags
 
   vpc_id = module.vpc.vpc_id
-
-  workers_group_defaults = {
-    root_volume_type = "gp2"
-  }
 
   workers_additional_policies = [
   aws_iam_policy.load-balancer-policy.arn]
