@@ -40,9 +40,10 @@ resource "aws_lb_target_group" "lb-api-tg" {
   vpc_id      = module.vpc.vpc_id
   health_check {
     healthy_threshold   = 2
-    unhealthy_threshold = 2
-    interval            = 5
-    timeout             = 3
+    unhealthy_threshold = 3
+    interval            = 15
+    timeout             = 13
+    path = "/actuator/health"
   }
   tags = merge(local.default_tags, {
     "elbv2.k8s.aws/cluster" = local.cluster_name
