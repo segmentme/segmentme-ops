@@ -58,9 +58,12 @@ variable "region" {
 }
 
 locals {
-  global_prefix      = "${var.project_name}-${var.environment}"
-  cluster_name       = "${local.global_prefix}-eks"
-  redis_cluster_name = "${local.global_prefix}-redis"
+  global_prefix                       = "${var.project_name}-${var.environment}"
+  cluster_name                        = "${local.global_prefix}-eks"
+  redis_cluster_name                  = "${local.global_prefix}-redis"
+  accountNumber                       = "925575267836"
+  k8s_service_account_namespace       = "kube-system"
+  k8s_service_autoscaler_account_name = "cluster-autoscaler-aws-cluster-autoscaler-chart"
   default_tags = {
     Environment = var.environment
     GithubRepo  = "segmentme-ops"

@@ -43,7 +43,7 @@ resource "aws_lb_target_group" "lb-api-tg" {
     unhealthy_threshold = 3
     interval            = 15
     timeout             = 13
-    path = "/actuator/health"
+    path                = "/actuator/health"
   }
   tags = merge(local.default_tags, {
     "elbv2.k8s.aws/cluster" = local.cluster_name
