@@ -90,29 +90,13 @@ resource "helm_release" "application-load-balancer-controller" {
 
 }
 
-resource "helm_release" "eks-autoscaler" {
-    depends_on = [
-        helm_release.application-load-balancer-controller
-    ]
-    name = "eks-autoscaler"
-    chart = "cluster-autoscaler"
-    repository = "https://kubernetes.github.io/autoscaler"
-    version = "9.10.7"
-    set {
-        name = "rbac.serviceAccount.annotations\\.eks.amazonaws.com/role-arn"
-        value = "arn:aws:iam::${local.accountNumber}::role/cluster-autoscaler"
-    }
+module "eks-cluster-autoscaler" {
+    source  = "lablabs/eks-cluster-autoscaler/aws"
+    version = "1.6.0"
 
-    set {
-        name = "autoDiscovery.clusterName"
-        value = local.cluster_name
-    }
-
-    set {
-        name = "awsRegion"
-        value = var.region
-    }
-
+    cluster_name                     = local.cluster_name
+    cluster_identity_oidc_issuer     = module.eks.cluster_oidc_issuer_url
+    cluster_identity_oidc_issuer_arn = module.eks.oidc_provider_arn
 }
 
 
