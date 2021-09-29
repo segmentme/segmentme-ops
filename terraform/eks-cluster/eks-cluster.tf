@@ -95,9 +95,9 @@ resource "helm_release" "eks-autoscaler" {
         helm_release.application-load-balancer-controller
     ]
     name = "eks-autoscaler"
-    chart = "autoscaler/cluster-autoscaler"
+    chart = "cluster-autoscaler"
     repository = "https://kubernetes.github.io/autoscaler"
-    version = "9.9.2"
+    version = "9.10.7"
     set {
         name = "rbac.serviceAccount.annotations\\.eks.amazonaws.com/role-arn"
         value = "arn:aws:iam::${local.accountNumber}::role/cluster-autoscaler"
